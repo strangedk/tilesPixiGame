@@ -1,0 +1,8 @@
+{
+  "devDependencies": {
+    "parcel": "^2.0.1"
+  },
+  "dependencies": {
+    "pixi.js": "^6.2.0"
+  }
+}
