@@ -1,20 +1,48 @@
-import * as PIXI from 'pixi.js';
-import Game from "./Game";
-
-const options = {
+import Phaser from 'phaser';
+var config = {
+  type: Phaser.AUTO,
   width: 800,
-  height: 600,
-  antialias: true,
-  transparent: true,
+  height: 800,
+  physics: {
+    default: 'arcade',
+    arcade: {
+      gravity: { y: 200 }
+    }
+  },
+  scene: {
+    preload: preload,
+    create: create
+  }
 };
 
-const app = new PIXI.Application(options);
+var game = new Phaser.Game(config);
 
-const init = () => {
-  const game = new Game(app);
-  app.stage.addChild(game);
+function preload ()
+{
+  this.load.setBaseURL('http://labs.phaser.io');
+
+  this.load.image('sky', 'assets/skies/space3.png');
+  this.load.image('logo', 'assets/sprites/phaser3-logo.png');
+  this.load.image('red', 'assets/particles/red.png');
 }
 
-init();
+function create ()
+{
+  this.add.image(400, 400, 'sky');
 
-document.body.appendChild(app.view);
+  var particles = this.add.particles('red');
+
+  var emitter = particles.createEmitter({
+    speed: 1000,
+    scale: { start: 1, end: 0 },
+    blendMode: 'ADD'
+  });
+
+  var logo = this.physics.add.image(400, 100, 'red');
+
+  logo.setVelocity(100, 200);
+  logo.setBounce(1, 1);
+  logo.setCollideWorldBounds(true);
+
+  emitter.startFollow(logo);
+}
