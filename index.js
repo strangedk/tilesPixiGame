@@ -15,7 +15,7 @@ var config = {
   }
 };
 
-var game = new Phaser.Game(config);
+const game = new Phaser.Game(config);
 
 function preload ()
 {
