@@ -1,4 +1,4 @@
-import * as PIXI from 'pixi.js'
+import * as PIXI from 'pixi.js';
 import Settings from "./src/settings/Settings";
 import Game from "./src/Game";
 
