@@ -3,7 +3,8 @@
     "dev": "parcel index.html --open"
   },
   "devDependencies": {
-    "parcel": "^2.0.1"
+    "parcel": "^2.0.1",
+    "querystring-es3": "^0.2.1"
   },
   "dependencies": {
     "pixi.js": "^6.3.0"
