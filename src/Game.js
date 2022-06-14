@@ -13,16 +13,16 @@ class Game extends PIXI.Container {
 
     for (let i = 0; i < Settings.GRID_WIDTH; i++) {
       for (let j = 0; j < Settings.GRID_HEIGHT; j++) {
-        const sprite = this.createSprite(i, j, textureCommon, textureHover);
+        const sprite = this.createSprite(textureCommon, textureHover);
+        sprite.x = i * Settings.ITEM_SIZE;
+        sprite.y = j * Settings.ITEM_SIZE;
         this.addChild(sprite);
       }
     }
-  }  
+  }
 
-  createSprite(i, j, textureCommon, textureHover) {
+  createSprite(textureCommon, textureHover) {
     const sprite = new PIXI.Sprite(textureCommon);
-    sprite.x = i * Settings.ITEM_SIZE;
-    sprite.y = j * Settings.ITEM_SIZE;
     sprite.interactive = true;
 
     sprite.on('click', () => {
@@ -32,7 +32,7 @@ class Game extends PIXI.Container {
         sprite.texture = textureCommon;
       }
     });
-    return sprite;    
+    return sprite;
   }
 }
 
@@ -41,7 +41,7 @@ export default Game;
 // Сітка 4х4 але як впровадити не знаю
 
 // let result = '';
-// const length = 4; 
+// const length = 4;
 // const weght = 4;
 // for (let i = 1; i <= length; i++){
 //   for (let j = 1; j<= weght; j++){
