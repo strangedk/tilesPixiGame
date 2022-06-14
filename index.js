@@ -7,8 +7,8 @@ class Main extends PIXI.Container {
     super();
 
     const options = {
-      width: Settings.WIDTH,
-      height: Settings.HEIGHT,
+      width: Settings.STAGE_WIDTH,
+      height: Settings.STAGE_HEIGHT,
       antialias: true,
       transparent: true,
     };

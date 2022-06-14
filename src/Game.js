@@ -1,21 +1,38 @@
 import * as PIXI from 'pixi.js';
+import Settings from './settings/Settings';
 
 class Game extends PIXI.Container {
   constructor() {
     super();
 
-    const texture = PIXI.Texture.from('cover.png');
+    this.interactive = true;
+    this.interactiveChildren = true;
 
-    const sprite = new PIXI.Sprite(texture);
-    
-    this.addChild(sprite);
-    
+    const textureCommon = PIXI.Texture.from('cover.png');
+    const textureHover = PIXI.Texture.from('hover.png');
 
-    const sprite2 = new PIXI.Sprite(texture);
-    sprite2.x = 64;
-    sprite2.y = 64;
-    this.addChild(sprite2);
+    for (let i = 0; i < Settings.GRID_WIDTH; i++) {
+      for (let j = 0; j < Settings.GRID_HEIGHT; j++) {
+        const sprite = this.createSprite(i, j, textureCommon, textureHover);
+        this.addChild(sprite);
+      }
+    }
+  }  
 
+  createSprite(i, j, textureCommon, textureHover) {
+    const sprite = new PIXI.Sprite(textureCommon);
+    sprite.x = i * Settings.ITEM_SIZE;
+    sprite.y = j * Settings.ITEM_SIZE;
+    sprite.interactive = true;
+
+    sprite.on('click', () => {
+      if (sprite.texture === textureCommon) {
+        sprite.texture = textureHover;
+      } else {
+        sprite.texture = textureCommon;
+      }
+    });
+    return sprite;    
   }
 }
 
