@@ -8,12 +8,13 @@ class Game extends PIXI.Container {
     this.interactive = true;
     this.interactiveChildren = true;
 
-    const textureCommon = PIXI.Texture.from('cover.png');
-    const textureHover = PIXI.Texture.from('hover.png');
+    const textureCommon = PIXI.Texture.from('cover.png'),
+          textureHover = PIXI.Texture.from('hover.png'),
+          textureGem = PIXI.Texture.from('gem_64.png');
 
     for (let i = 0; i < Settings.GRID_WIDTH; i++) {
       for (let j = 0; j < Settings.GRID_HEIGHT; j++) {
-        const sprite = this.createSprite(textureCommon, textureHover);
+        const sprite = this.createSprite(textureCommon, textureHover, textureGem);
         sprite.x = i * Settings.ITEM_SIZE;
         sprite.y = j * Settings.ITEM_SIZE;
         this.addChild(sprite);
@@ -21,13 +22,16 @@ class Game extends PIXI.Container {
     }
   }
 
-  createSprite(textureCommon, textureHover) {
+  createSprite(textureCommon, textureHover, textureGem) {
     const sprite = new PIXI.Sprite(textureCommon);
     sprite.interactive = true;
+    
 
     sprite.on('click', () => {
       if (sprite.texture === textureCommon) {
         sprite.texture = textureHover;
+      } if (sprite.texture === textureHover){
+        sprite.texture = textureGem;
       } else {
         sprite.texture = textureCommon;
       }
