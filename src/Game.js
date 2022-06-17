@@ -10,15 +10,14 @@ class Game extends PIXI.Container {
     this.interactive = true;
     this.interactiveChildren = true;
 
-    const itemsPath = ['gem_64.png', 'gem_64.png', 'gem_64.png', 'gem_64.png', ];
+    const itemsPath = ['gem_0.png', 'gem_1.png', 'gem_2.png', 'gem_3.png', 'gem_4.png', 'gem_5.png', 'gem_6.png'];
     const itemsTextures = itemsPath.map(path => PIXI.Texture.from(path));
 
-    const textureCommon = PIXI.Texture.from('cover.png'),
-          textureHover = PIXI.Texture.from('hover.png')
+    const textureCommon = PIXI.Texture.from('cover.png');
 
     for (let i = 0; i < Settings.GRID_WIDTH; i++) {
       for (let j = 0; j < Settings.GRID_HEIGHT; j++) {
-        const sprite = this.createSprite(textureCommon, textureHover, textureGem);
+        const sprite = this.createSprite(textureCommon, itemsTextures);
         sprite.x = i * Settings.ITEM_SIZE;
         sprite.y = j * Settings.ITEM_SIZE;
         this.addChild(sprite);
@@ -26,7 +25,7 @@ class Game extends PIXI.Container {
     }
   }
 
-  createSprite(textureCommon, textureHover, textureGem) {
+  createSprite(textureCommon, itemsTextures) {
     const sprite = new PIXI.Sprite(textureCommon);
     sprite.interactive = true;
     
@@ -35,14 +34,7 @@ class Game extends PIXI.Container {
         sprite.texture = textureCommon;
         sprite.filters = null;
       } else {
-        const newTexture = (Math.random() > 0.5) ? textureHover : textureGem;
-        sprite.texture = newTexture;
-
-        if (sprite.texture === textureGem) {
-          const colorMatrix = new PIXI.filters.ColorMatrixFilter();
-          sprite.filters = [colorMatrix];
-          colorMatrix.hue(Math.random() * 360, false);      
-        }
+        sprite.texture = itemsTextures;
       }
     });
     return sprite;
