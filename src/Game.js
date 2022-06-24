@@ -25,16 +25,16 @@ class Game extends PIXI.Container {
     }
   }
 
-  createSprite(textureCommon, itemsTextures) {
-    const sprite = new PIXI.Sprite(textureCommon);
+  createSprite(commonTexture, itemsTextures) {
+    const sprite = new PIXI.Sprite(commonTexture);
     sprite.interactive = true;
-
     sprite.on('click', () => {
-      if (sprite.texture !== textureCommon) {
-        sprite.texture = textureCommon;
+      if (sprite.texture !== commonTexture) {
+        sprite.texture = commonTexture
+
         sprite.filters = null;
       } else {
-        sprite.texture = itemsTextures[0];
+        sprite.texture = itemsTextures[Math.floor(Math.random() * 6)];
       }
     });
     return sprite;
