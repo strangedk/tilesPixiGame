@@ -2,10 +2,10 @@ import * as PIXI from 'pixi.js';
 import Settings from './settings/Settings';
 
 class Game extends PIXI.Container {
-  constructor() {    
+  constructor() {
     super();
 
-    console.log("::: Version 3");
+    console.log("::: Version 4");
 
     this.interactive = true;
     this.interactiveChildren = true;
@@ -28,17 +28,18 @@ class Game extends PIXI.Container {
   createSprite(textureCommon, itemsTextures) {
     const sprite = new PIXI.Sprite(textureCommon);
     sprite.interactive = true;
-    
+
     sprite.on('click', () => {
       if (sprite.texture !== textureCommon) {
         sprite.texture = textureCommon;
         sprite.filters = null;
       } else {
-        sprite.texture = itemsTextures;
+        sprite.texture = itemsTextures[0];
       }
     });
     return sprite;
   }
+
 }
 
 export default Game;
@@ -60,9 +61,9 @@ export default Game;
 /*
     // The same both
     for (let path in itemsPath) {
-      console.log(`name: ${path}`)      
+      console.log(`name: ${path}`)
     }
-    
+
     itemsPath.forEach(path => console.log(`name: ${path}`));
 
     // The short example
