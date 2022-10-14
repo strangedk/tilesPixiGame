@@ -10,6 +10,10 @@ class Game extends PIXI.Container {
     this.interactive = true;
     this.interactiveChildren = true;
 
+    this.test();
+
+    return;
+
     const itemsPath = ['gem_0.png', 'gem_1.png', 'gem_2.png', 'gem_3.png', 'gem_4.png', 'gem_5.png', 'gem_6.png'];
     const itemsTextures = itemsPath.map(path => PIXI.Texture.from(path));
 
@@ -23,6 +27,35 @@ class Game extends PIXI.Container {
         this.addChild(sprite);
       }
     }
+  }
+
+  test() {
+
+    const g = new PIXI.Graphics();
+    g.lineStyle(1,0x663f33);
+    g.moveTo(320,240);
+    this.addChild(g);
+
+    let delta = 0;
+    let r = 10;
+
+	  const proceed = () => {
+	    delta += 100;
+	    r += 10;
+      let x = 320 + r * Math.cos(delta);
+      let y = 240 + r * Math.sin(delta);
+
+      console.log(x, ":", y);
+
+	    g.moveTo(320,240)
+      g.lineTo(x,y)
+    }
+
+    setInterval(() => {
+      proceed()
+      g.rotation -= 0.05;
+      // g.transform.position.set(g.width/2, g.height/2)
+    }, 50);
   }
 
   createSprite(commonTexture, itemsTextures) {
